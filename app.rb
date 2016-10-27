@@ -7,6 +7,12 @@ Stripe.api_key = $PRIVATE_STRIPE_TEST_KEY
 
 # home page route
 get '/' do
+  # get list of products -- we'll include these
+  # on our store page eventually
+  db = SQLite3::Database.new("store.db")
+  db.results_as_hash = true
+  products = db.execute("SELECT * from PRODUCTS")
+
   "Welcome to the Stripe store."
 end
 
