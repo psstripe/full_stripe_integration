@@ -3,6 +3,7 @@ require 'sinatra'
 require 'stripe'
 require 'sqlite3'
 require 'json'
+# require 'pry'
 
 Stripe.api_key = $PRIVATE_STRIPE_TEST_KEY
 
@@ -58,6 +59,7 @@ post '/purchase' do
 
   p customer
   p customer.id
+  # binding.pry
 
   db = SQLite3::Database.new("store.db")
   db.results_as_hash = true
@@ -71,18 +73,19 @@ post '/purchase' do
 end
 
 get '/purchase_confirmation' do
+  # binding.pry
   "Thank you for your purchase."
 
 end
 
-# Using Sinatra
-post '/webhooks' do
-  # Retrieve the request's body and parse it as JSON
-  event_json = JSON.parse(request.body.read)
-
-  # Do something with event_json
-
-  status 200
-
-  p event_json
-end
+# # Using Sinatra
+# post '/webhooks' do
+#   # Retrieve the request's body and parse it as JSON
+#   event_json = JSON.parse(request.body.read)
+#
+#   # Do something with event_json
+#
+#   status 200
+#
+#   p event_json
+# end
